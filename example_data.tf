@@ -10,7 +10,7 @@ resource "aws_s3_bucket_object" "web_page" {
   for_each = local.domain_folders
 
   bucket  = module.web_pages_storage.s3_bucket.id
-  key     = "${each.key}/index.html"
+  key     = "${each.value}/index.html"
   content = templatefile(
     "${path.module}/templates/index.html.tpl",
     {
