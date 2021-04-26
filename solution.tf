@@ -9,3 +9,7 @@ module "web_pages_provider" {
 
   s3_bucket = module.web_pages_storage.s3_bucket
 }
+
+module "domain_service" {
+  source = "./modules/domain_service"
+}
