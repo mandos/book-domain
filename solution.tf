@@ -1,5 +1,7 @@
 module "web_pages_storage" {
-  source = "./modules/s3"
+  source = "./modules/storage"
+
+  cloudfront_origin_access_identity = module.web_pages_provider.cloudfront_origin_access_identity
 }
 
 module "web_pages_provider" {
