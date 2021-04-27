@@ -47,9 +47,9 @@ resource "aws_cloudfront_distribution" "this" {
 
     viewer_protocol_policy = "allow-all"
     # For testing purpose
-    min_ttl                = 0
-    default_ttl            = 0
-    max_ttl                = 0
+    min_ttl     = 0
+    default_ttl = 0
+    max_ttl     = 0
   }
 
   restrictions {

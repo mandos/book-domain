@@ -1,6 +1,6 @@
 data "aws_iam_policy_document" "logging" {
   statement {
-    actions   = [
+    actions = [
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
       "logs:PutLogEvents"
@@ -9,7 +9,7 @@ data "aws_iam_policy_document" "logging" {
   }
 
   statement {
-    actions   = [
+    actions = [
       "dynamodb:GetItem",
     ]
     resources = [var.dynamodb.arn]
@@ -21,7 +21,7 @@ data "aws_iam_policy_document" "edge_lambda" {
     actions = ["sts:AssumeRole"]
 
     principals {
-      type        = "Service"
+      type = "Service"
       identifiers = [
         "lambda.amazonaws.com",
         "edgelambda.amazonaws.com"
@@ -35,7 +35,7 @@ resource "aws_iam_role" "edge_lambda" {
 
   assume_role_policy = data.aws_iam_policy_document.edge_lambda.json
   inline_policy {
-    name = "logging"
+    name   = "logging"
     policy = data.aws_iam_policy_document.logging.json
   }
 }

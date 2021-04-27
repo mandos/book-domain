@@ -1,7 +1,7 @@
-variable s3_bucket {
+variable "s3_bucket" {
 
 }
 
-variable dynamodb {
+variable "dynamodb" {
 
 }
