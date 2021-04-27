@@ -14,17 +14,12 @@ resource "aws_cloudfront_distribution" "this" {
 
   enabled             = true
   is_ipv6_enabled     = false
-  comment             = "Some comment"
+  comment             = "DomainSwitcher Service"
   default_root_object = "index.html"
 
   price_class = "PriceClass_100"
 
-  # lambda_function_association {
-  #   event_type   = "origin-request"
-  #   lambda_arn   = aws_lambda_function.example.qualified_arn
-  #   include_body = false
-  # }
-
+  # Have to be set automatically
   # aliases = [
   #   "foo1.boo.pl",
   #   "foo2.boo.pl",
@@ -44,10 +39,17 @@ resource "aws_cloudfront_distribution" "this" {
       }
     }
 
+    lambda_function_association {
+      event_type   = "origin-request"
+      lambda_arn   = aws_lambda_function.edge_lambda.qualified_arn
+      include_body = false
+    }
+
     viewer_protocol_policy = "allow-all"
+    # For testing purpose
     min_ttl                = 0
-    default_ttl            = 3600
-    max_ttl                = 86400
+    default_ttl            = 0
+    max_ttl                = 0
   }
 
   restrictions {
